@@ -1,0 +1,48 @@
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.pdfsync
+
+# LaTeX intermediate files
+*.fdb_latexmk
+*.fls
+*.synctex(busy)
+*.synctex.gz(busy)
+*.synctex.gz(busy+)
+*.synctex.gz(busy-)
+*.synctex.gz(busy0)
+*.synctex.gz(busy1)
+*.synctex.gz(busy2)
+*.synctex.gz(busy3)
+*.synctex.gz(busy4)
+*.synctex.gz(busy5)
+*.synctex.gz(busy6)
+*.synctex.gz(busy7)
+*.synctex.gz(busy8)
+*.synctex.gz(busy9)
+
+# LaTeX editor files
+*.bak
+*.swp
+*.synctex.gz
+*.synctex.gz(busy)
+*.synctex.gz(busy+)
+*.synctex.gz(busy-)
+*.synctex.gz(busy0)
+*.synctex.gz(busy1)
+*.synctex.gz(busy2)
+*.synctex.gz(busy3)
+*.synctex.gz(busy4)
+*.synctex.gz(busy5)
+*.synctex.gz(busy6)
+*.synctex.gz(busy7)
+*.synctex.gz(busy8)
+*.synctex.gz(busy9)
+
+# LaTeX generated files
+*.dvi
+*.ps
+*.pdf

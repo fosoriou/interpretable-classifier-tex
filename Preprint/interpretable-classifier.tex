@@ -1,0 +1,159 @@
+\documentclass[preprint,superscriptaddress,preprintnumbers,aps,amsmath,amssymb]{revtex4}
+%\documentclass[twocolumn,aps,superscriptaddress,amsmath,amssymb]{revtex4}
+%\documentclass[preprint,aps,draft]{revtex4}
+%\documentclass[12pt]{iopart}
+
+%\newcommand{\gguide}{{\it Preparing graphics for IOP Publishing journals}}
+%Uncomment next line if AMS fonts required
+%\usepackage{iopams}  
+
+
+\usepackage{bm} %bold math
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+\usepackage{amsfonts}
+\usepackage{hyperref}		% to include hyperlinks
+\hypersetup{
+  colorlinks   = true,		%Colours links instead of ugly boxes
+  urlcolor     = blue,		%Colour for external hyperlinks
+  linkcolor    = blue,		%Colour of internal links
+  citecolor   = blue		%Colour of citations
+}
+%\hypersetup{colorlinks=false,linkbordercolor=red,linkcolor=green,pdfborderstyle={/S/U/W 1}}
+
+%% Notes
+\usepackage{xcolor}
+\newcommand{\notablue}[1]{{\color{blue}\textrm{#1}}}
+\newcommand{\nota}[1]{{\color{red}\textrm{#1}}}
+
+%\usepackage{cite}
+%\renewcommand{\eqref}[1]{\textbf{\ref{#1}}}
+
+%%%% Multiple-row package for tables %%%%
+\usepackage{multirow}
+
+%%%%%%%%%%%%% Images %%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+%\usepackage{epstopdf}
+
+
+%%%%%%%%%%%% Quantum mechanical brackets %%%%%%%%%%%%%%%%%
+\usepackage{braket}
+\def\KetBra#1#2{\Ket{#1}\!\!\Bra{#2}}
+\newcommand{\crea}[2]{\hat #1^{\dagger}_{#2}}
+\newcommand{\anni}[2]{\hat #1_{#2}}
+
+%% OPTIONAL MACRO DEFINITIONS
+\def\ud{\text{d}}
+\def\r{\mathbf{r}}
+\def\x{\mathbf{x}}
+\def\R{\boldsymbol{R}}
+\def\k{\mathbf{k}}
+\def\q{\mathbf{q}}
+\def\E{\mathbf{E}}
+\def\B{\mathbf{B}}
+\def\H{\mathbf{H}}
+\def\A{\mathbf{A}}
+\def\u{\mathbf{u}}
+\def\e{\mathbf{e}}
+\def\bbeta{\boldsymbol{\beta}}
+\def\brho{\boldsymbol{\rho}}
+
+%% Long tables
+\usepackage{longtable}
+
+\begin{document}
+\title{Interpretable Machine Learning Classifier for Molecular Identification with Visible Light}
+\author{Felipe Osorio}
+\affiliation{Department of Physics, Universidad de Santiago de Chile, Av. Victor Jara 3943, Santiago, Chile}
+\author{Felipe Herrera}
+\affiliation{Department of Physics, Universidad de Santiago de Chile, Av. Victor Jara 3943, Santiago, Chile}
+\date{\today}
+
+\maketitle
+
+\section{Introduction}
+ [TBD] \\
+
+\subsection*{Problem Statement}
+Observing the performance of the automated learning model when evaluated on the specific Visible data subset, we seek for explanation of the model's predictions. In \textit{organic\_optical\_classifier}, it was identified that the most effective preprocessing technique to achieve good precision performance was \textit{Data Augmentation}, which raises the question of how the model captures the physical behavior represented in the data.
+
+\subsection*{Proposed Solution}
+An algorithm is developed to navigate the data structure of the classifier model. The algorithm captures the resulting evaluations from each of the decision trees that make up the Random Forest (RF) model \cite{Breiman2001}, identifying their decision nodes, the feature used for the decision, and the threshold value on which the training subset is partitioned. From each decision, the information gain/impurity reduction of each decision is obtained, allowing the quality of the decision to be quantified in terms of the homogeneity of the labels in the resulting partition.
+
+Due to the nature of the data, where two of its descriptors (\textit{n}, \textit{k}) are (physically) a function of a third descriptor (\(\lambda\)), the distribution of threshold values selected by the model for the \(\lambda\) feature is studied.
+
+
+\section{Data Preprocessing}
+ [TBD] The preprocessing steps applied to the spectral data includes data selection, handling of missing values.
+\newpage
+\begin{longtable}{lrrrrc}
+  \toprule
+  Molecule Class                 & n records & k records & min $\lambda$ & max $\lambda$ & Accuracy \\
+  \hline
+  Cyclohexane                    & 392       & 0         & 0.400         & 0.830         & -        \\
+  Methanol                       & 2729      & 14823     & 0.400         & 14.997        & -        \\
+  Pentanol, amyl alcohol         & 138       & 64        & 0.450         & 1.551         & -        \\
+  acetic\_acid                   & 2599      & 0         & 0.400         & 0.800         & -        \\
+  acetone                        & 101       & 0         & 0.476         & 0.830         & -        \\
+  acetonitrile                   & 129       & 14823     & 0.400         & 14.997        & -        \\
+  benzene                        & 2568      & 14823     & 0.450         & 14.997        & -        \\
+  butanol                        & 2738      & 64        & 0.400         & 1.551         & -        \\
+  carbon\_tetrachloride          & 136       & 144       & 0.450         & 9.000         & -        \\
+  cellulose                      & 101       & 0         & 0.437         & 1.052         & -        \\
+  chloroform                     & 64        & 37        & 0.500         & 1.600         & -        \\
+  cinnamaldehyde                 & 2600      & 0         & 0.589         & 1.050         & -        \\
+  diethyl\_sulfite               & 81        & 463       & 0.400         & 14.925        & -        \\
+  dimethyl\_sulfoxide            & 2560      & 0         & 0.400         & 0.750         & -        \\
+  dioxane                        & 69        & 32        & 0.450         & 1.551         & -        \\
+  ethanol                        & 486       & 15569     & 0.400         & 14.998        & -        \\
+  ethyl\_cinnamate               & 2600      & 0         & 0.450         & 0.750         & -        \\
+  ethyl\_salicylate              & 101       & 0         & 0.589         & 1.050         & -        \\
+  ethylene\_glycol               & 5462      & 589       & 0.400         & 14.860        & -        \\
+  glycerol                       & 104       & 0         & 0.400         & 1.050         & -        \\
+  methane                        & 145       & 125       & 0.400         & 14.800        & -        \\
+  methyl\_salicylate             & 101       & 0         & 0.589         & 1.050         & -        \\
+  nitrobenzene                   & 2563      & 14828     & 0.500         & 14.997        & -        \\
+  pentane                        & 231       & 830       & 0.402         & 14.925        & -        \\
+  poly(N-isopropylacrylamide)    & 2937      & 142       & 0.400         & 1.688         & -        \\
+  poly(methyl\_methacrylate)     & 10628     & 3565      & 0.400         & 15.000        & -        \\
+  polycarbonate                  & 5180      & 514       & 0.400         & 14.899        & -        \\
+  polydimethylsiloxane           & 9195      & 2984      & 0.400         & 14.925        & -        \\
+  polyetherimide                 & 2580      & 514       & 0.400         & 14.899        & -        \\
+  polyethylene\_terephthalate    & 2580      & 514       & 0.400         & 14.899        & -        \\
+  polylactic\_acid               & 2600      & 0         & 0.405         & 0.750         & -        \\
+  polystyren                     & 5180      & 15305     & 0.400         & 14.997        & -        \\
+  polyvinil\_chloride            & 2580      & 514       & 0.400         & 14.899        & -        \\
+  polyvinyl\_alcohol             & 5167      & 25        & 0.400         & 1.500         & -        \\
+  polyvinylpyrrolidone           & 2524      & 0         & 0.400         & 1.000         & -        \\
+  potassium\_hydrogen\_phthalate & 7704      & 96        & 0.450         & 1.551         & -        \\
+  propanol                       & 390       & 15562     & 0.400         & 14.997        & -        \\
+  propylene\_glycol              & 4         & 0         & 0.434         & 0.656         & -        \\
+  styrene                        & 2600      & 14791     & 0.437         & 14.997        & -        \\
+  toluene                        & 7702      & 14860     & 0.400         & 14.997        & -        \\
+  urea                           & 5174      & 0         & 0.400         & 1.060         & -        \\
+  \hline
+\end{longtable}
+
+
+\section{Methodology}
+ [TBD] Describe the machine learning models used, including any hyperparameter tuning and validation techniques.
+\subsection*{Decision node analysis}
+\subsection*{Decision path on input data}
+
+\section{Results}
+ [TBD] Present the results of the classification, including performance metrics.
+Add a comparison with baseline models.
+
+\section{Discussion}
+ [TBD] Interpret the results, discussing the implications and potential applications of the findings.
+
+\section{Conclusion}
+ [TBD] Summarize the main findings and suggest directions for future research.
+
+\bibliographystyle{unsrt}
+\bibliography{interpret.bib}
+
+\end{document}
