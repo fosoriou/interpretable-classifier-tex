@@ -6,6 +6,10 @@
 *.synctex.gz
 *.pdfsync
 
+# Intermediate bib files
+*.bbl
+*.blg
+
 # LaTeX intermediate files
 *.fdb_latexmk
 *.fls
